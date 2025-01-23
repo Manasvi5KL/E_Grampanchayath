@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Project Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" integrity="sha512-o4gKX6jcK0rdciOZ9X8COYkV9gviTJAbYEVW8aC3OgIRuaKDmcT9/OFXBVzHSSOxiTjsTktqrUvCUrHkQHSn9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    body{
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRtheU4rG1GfWPvOvIiCuJFrLXqVNRuoEHUg&usqp=CAU");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    #form1, #form2, #form3, #form4, #form5{
+      width: 50%;
+      margin: 40px auto 0 auto;
+      padding: 25px 75px;
+      background-color: rgba(0, 0, 0, 0.50);
+      color: white;
+      display: none;
+    }
+    #form1.active, #form2.active, #form3.active, #form4.active, #form5.active{
+        display: block;
+    }
+    a:hover{
+      color: peru;
+      text-decoration: none;
+    }
+    h2, p{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" data-value="#form1" onclick="toggleform(event)">E - GRAM PANCHAYAT</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a data-value="#form1" onclick="toggleform(event)">Billing</a></li>
+        <li><a data-value="#form2" onclick="toggleform(event)">Birth</a></li>
+        <li><a data-value="#form3" onclick="toggleform(event)">Death</a></li>
+        <li><a data-value="#form4" onclick="toggleform(event)">Land</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container">
+  {% if msg %}
+        <div class="container">
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{msg}}</strong> 
+            </div>
+            </div>
+        {% endif %}
+    <form  method="post" action="/billing" id="form1" class="active">
+      <h2>Billing</h2>
+      <hr>
+      <div class="form-group">
+        <label for="home">Home Number:</label>
+        <input type="text" class="form-control" id="home" placeholder="Enter home number" name="home">
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="cbill">Current bill:</label>
+        <input type="number" class="form-control" id="cbill" placeholder="Enter current bill" name="cbill">
+      </div>
+      <div class="form-group">
+        <label for="wbill">Water bill:</label>
+        <input type="number" class="form-control" id="wbill" placeholder="Enter water bill" name="wbill">
+      </div>
+      <div class="form-group">
+        <label for="loan">Loan amount:</label>
+        <input type="number" class="form-control" id="loan" placeholder="Enter loan amount" name="loan">
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button></br></br>
+    </form>
+
+      <form  method="post" action="/birth" id="form2" >
+        <h2>Birth details</h2>
+        <hr>
+        <div class="form-group">
+          <label for="home">Home number:</label>
+          <input type="text" class="form-control" id="home" placeholder="Enter home number" name="home">
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="place">Place:</label>
+          <input type="text" class="form-control" id="place" placeholder="Enter birth place" name="place">
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button></br></br>
+      </form>
+  
+      
+      <form  method="post" action="/death" id="form3" >
+        <h2>Death details</h2>
+        <hr>
+        <div class="form-group">
+          <label for="home">Home number:</label>
+          <input type="text" class="form-control" id="home" placeholder="Enter home number" name="home">
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="place">Place:</label>
+          <input type="text" class="form-control" id="place" placeholder="Enter birth place" name="place">
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button></br></br>
+      </form>
+
+    <form  method="post" action="/land" id="form4">
+      <h2>Land details</h2>
+      <hr>
+      <div class="form-group">
+        <label for="home">Home Number:</label>
+        <input type="text" class="form-control" id="home" placeholder="Enter home number" name="home">
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="place">place:</label>
+        <input type="text" class="form-control" id="place" placeholder="Enter land place" name="place">
+      </div>
+      <div class="form-group">
+        <label for="land">land:</label>
+        <input type="number" class="form-control" id="land" placeholder="in acres" name="land">
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button></br></br>
+    </form>
+</div>
+
+<script>
+    function toggleform(e) {
+    var Id =(e.target.getAttribute('data-value'))
+    let Items= ['#form1', '#form2', '#form3', '#form4', '#form5'];
+    Items.map(function(item) {
+        if(Id === item ) {
+            $(item).addClass("active");
+        }
+        else {
+        $(item).removeClass("active");
+        }
+    })
+}
+
+</script>
+</body>
+</html>

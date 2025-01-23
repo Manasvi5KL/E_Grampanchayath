@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Project Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" integrity="sha512-o4gKX6jcK0rdciOZ9X8COYkV9gviTJAbYEVW8aC3OgIRuaKDmcT9/OFXBVzHSSOxiTjsTktqrUvCUrHkQHSn9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    body{
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRtheU4rG1GfWPvOvIiCuJFrLXqVNRuoEHUg&usqp=CAU");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    #content{
+      width: 75%;
+      margin: auto;
+    }
+    #content, #content2{
+        background-color: white;
+        padding: 50px;
+        display: none;
+    }
+    #content.active, #content2.active{
+        display: block;
+    }
+    .table{
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand">E - GRAM PANCHAYAT</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a data-value="#content" onclick="toggleform(event)">Complaints</a></li>
+        <li><a data-value="#content2" onclick="toggleform(event)">User details</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container">
+        {% if msg %}
+        <div class="container">
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{msg}}</strong> 
+            </div>
+            </div>
+        {% endif %}
+
+        
+        <div id="content" class="active"> 
+          {% if results %}
+            <center><h2>Complaints</h2></center>
+            <br>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Subject</th>
+                </tr>
+                {% for row in results %}
+                    <tr>
+                        {% for col in row %}
+                            <td>
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+             <center><h3>Complaints not found</h3></center>
+            {% endif %}
+        </div>
+
+        <div id="content2"> 
+
+          <div class="row">
+            <div class="col-lg-6">
+              {% if details %}
+              <center><h2>User Details</h2></center>
+              <br>
+              <table class="table">
+                  <tr>
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Email</th>
+                      <th>Home No</th>
+                  </tr>
+                  {% for row in details %}
+                      <tr>
+                          {% for col in row %}
+                              <td>
+                                  {{col}}
+                              </td>
+                          {% endfor %}
+                      </tr>
+                  {% endfor %}
+              </table>
+              {% else %}
+               <center><h3>User details not found</h3></center>
+              {% endif %}
+            </div>
+            <div class="col-lg-6">
+              {% if lands %}
+              <center><h2>Land details</h2></center>
+              <br>
+              <table class="table">
+                  <tr>
+                      <th>Home no</th>
+                      <th>Name</th>
+                      <th>Place</th>
+                      <th>Area</th>
+                  </tr>
+                  {% for row in lands %}
+                      <tr>
+                          {% for col in row %}
+                              <td>
+                                  {{col}}
+                              </td>
+                          {% endfor %}
+                      </tr>
+                  {% endfor %}
+              </table>
+              {% else %}
+               <center><h3>Land details not found</h3></center>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              {% if billings %}
+              <center><h2>Billing Details</h2></center>
+              <br>
+              <table class="table">
+                  <tr>
+                      <th>Home no</th>
+                      <th>Name</th>
+                      <th>Current Bill</th>
+                      <th>Water Bill</th>
+                      <th>Load Bill</th>
+                  </tr>
+                  {% for row in billings %}
+                      <tr>
+                          {% for col in row %}
+                              <td>
+                                  {{col}}
+                              </td>
+                          {% endfor %}
+                      </tr>
+                  {% endfor %}
+              </table>
+              {% else %}
+               <center><h3>Billing details not found</h3></center>
+              {% endif %}
+            </div>
+            <div class="col-lg-6">
+              {% if births %}
+              <center><h2>Birth Details</h2></center>
+              <br>
+              <table class="table">
+                  <tr>
+                      <th>Home no</th>
+                      <th>Name</th>
+                      <th>Place</th>
+                      <th>Date</th>
+                  </tr>
+                  {% for row in births %}
+                      <tr>
+                          {% for col in row %}
+                              <td>
+                                  {{col}}
+                              </td>
+                          {% endfor %}
+                      </tr>
+                  {% endfor %}
+              </table>
+              {% else %}
+               <center><h3>Birth details not found</h3></center>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              {% if deaths %}
+              <center><h2>Death Details</h2></center>
+              <br>
+              <table class="table">
+                  <tr>
+                      <th>Home no</th>
+                      <th>Name</th>
+                      <th>Place</th>
+                      <th>Date</th>
+                  </tr>
+                  {% for row in deaths %}
+                      <tr>
+                          {% for col in row %}
+                              <td>
+                                  {{col}}
+                              </td>
+                          {% endfor %}
+                      </tr>
+                  {% endfor %}
+              </table>
+              {% else %}
+               <center><h3>Death details not found</h3></center>
+              {% endif %}
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+          </div>
+        </div>
+  
+  </div>
+
+  <script>
+    function toggleform(e) {
+    var Id =(e.target.getAttribute('data-value'))
+    let Items= ['#content','#content2'];
+    Items.map(function(item) {
+        if(Id === item ) {
+            $(item).addClass("active");
+        }
+        else {
+        $(item).removeClass("active");
+        }
+    })
+}
+
+</script>
+</body>
+</html>
